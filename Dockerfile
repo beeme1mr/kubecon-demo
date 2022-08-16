@@ -6,7 +6,7 @@ COPY node_modules /node_modules
 COPY dist /dist
 COPY scripts /scripts
 COPY schemas /schemas
-LABEL org.opencontainers.image.source=https://github.com/open-feature/open-feature-demo
+LABEL org.opencontainers.image.source = "https://github.com/beeme1mr/kubecon-demo"
 
 EXPOSE 30000
 
