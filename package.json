@@ -20,7 +20,9 @@
     "temp": "nx build",
     "build": "nx build --progress=true --all && nx build ui && cp -R dist/packages/ui/* dist/packages/app/assets/public/ && cp -R scripts/ dist/scripts",
     "docker-build": "docker buildx build --platform=\"linux/ppc64le,linux/s390x,linux/amd64,linux/arm64\" . -t ghcr.io/beeme1mr/kubecon-demo:latest",
-    "docker-build-push": "docker buildx build --push --platform=\"linux/ppc64le,linux/s390x,linux/amd64,linux/arm64\" . -t ghcr.io/beeme1mr/kubecon-demo:latest"
+    "docker-build-push": "docker buildx build --push --platform=\"linux/ppc64le,linux/s390x,linux/amd64,linux/arm64\" . -t ghcr.io/beeme1mr/kubecon-demo:latest",
+    "fib3r-docker-build": "docker buildx build --platform=\"linux/ppc64le,linux/s390x,linux/amd64,linux/arm64\" . -f DockerfileFib3r-t ghcr.io/beeme1mr/fib3r-kubecon-demo:latest",
+    "fib3r-docker-build-push": "docker buildx build --push --platform=\"linux/ppc64le,linux/s390x,linux/amd64,linux/arm64\" . -f DockerfileFib3r -t ghcr.io/beeme1mr/fib3r-kubecon-demo:latest"
   },
   "private": true,
   "dependencies": {
