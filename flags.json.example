@@ -13,6 +13,15 @@
     "defaultVariant": "blue",
     "state": "enabled"
   },
+  "useRemoteFibService": {
+    "returnType": "boolean",
+    "variants": {
+      "on": true,
+      "off": false,
+    },
+    "defaultVariant": "on",
+    "state": "enabled"
+  },
   "fibAlgo": {
     "returnType": "string",
     "variants": {

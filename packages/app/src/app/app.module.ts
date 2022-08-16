@@ -8,12 +8,13 @@ import { TransactionContextMiddleware } from './transaction-context.middleware';
 import { OPENFEATURE_CLIENT, REQUEST_DATA } from './constants';
 import { FibonacciAsAServiceController } from './fibonacci-as-a-service.controller';
 import { HexColorService } from './hex-color/hex-color.service';
-import { InstallService } from './install/install.service';
 import { MessageService } from './message/message.service';
 import { RequestData } from './types';
 import { UtilsController } from './utils.controller';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { HttpModule } from '@nestjs/axios';
+import { FibonacciService } from './fibonacci/fibonacci.service';
 
 /**
  * Adding hooks to at the global level will ensure they always run
@@ -33,13 +34,13 @@ OpenFeature.setTransactionContextPropagator(new AsyncLocalStorageTransactionCont
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '.', 'assets', 'public'),
     }),
+    HttpModule,
   ],
   controllers: [FibonacciAsAServiceController, UtilsController],
   providers: [
     MessageService,
-    InstallService,
     HexColorService,
-
+    FibonacciService,
     {
       provide: OPENFEATURE_CLIENT,
       useFactory: () => {
