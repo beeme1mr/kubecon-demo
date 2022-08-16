@@ -51,11 +51,13 @@ OpenFeature.setTransactionContextPropagator(new AsyncLocalStorageTransactionCont
       provide: REQUEST_DATA,
       useFactory: (req: Request): RequestData => {
         const authHeaderValue = req.header('Authorization') as string;
+        const userAgent = req.header('user-agent');
         return {
           ip: (req.headers['x-forwarded-for'] as string) || (req.socket.remoteAddress as string),
           email: authHeaderValue,
           method: req.method,
           path: req.path,
+          ...(userAgent && { userAgent }),
           userId: authHeaderValue,
         };
       },

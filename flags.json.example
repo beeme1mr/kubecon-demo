@@ -33,6 +33,11 @@
             "context": "email",
             "op": "ends_with",
             "value": "@faas.com"
+          },
+          {
+            "context": "userAgent",
+            "op": "starts_with",
+            "value": "k6"
           }
         ]
       }
