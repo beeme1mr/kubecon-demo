@@ -7,6 +7,8 @@ import { lastValueFrom, map } from 'rxjs';
 
 @Injectable()
 export class FibonacciService {
+  private readonly FIB3R_BASE_URL = process.env.FIB3R_BASE_URL || 'http://localhost:30001';
+
   constructor(private readonly httpService: HttpService, @Inject(OPENFEATURE_CLIENT) private client: Client) {}
 
   async calculateFibonacci(num: number): Promise<{ result: number }> {
@@ -15,7 +17,13 @@ export class FibonacciService {
     if (useRemoteFibService) {
       return lastValueFrom(
         this.httpService
-          .get<{ result: number }>('http://localhost:30001/calculate', { params: { num } })
+          .get<{ result: number }>(`${this.FIB3R_BASE_URL}/calculate`, {
+            params: { num },
+            auth: {
+              username: process.env.FIB3R_USER || '',
+              password: process.env.FIB3R_PASS || '',
+            },
+          })
           .pipe(map((res) => res.data))
       );
     }
